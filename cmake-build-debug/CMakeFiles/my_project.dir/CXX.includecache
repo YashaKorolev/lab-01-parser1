@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Json.h
+string
+-
+any
+-
+iostream
+-
+fstream
+-
+vector
+-
+stack
+-
+
+../include/JsonExeption.h
+Json.h
+../include/Json.h
+exception
+-
+
+/home/yasha/YashaKorolev/LabsAYa/lab-01/lab-01-parser/sources/Json.cpp
+Json.h
+/home/yasha/YashaKorolev/LabsAYa/lab-01/lab-01-parser/sources/Json.h
+JsonExeption.h
+/home/yasha/YashaKorolev/LabsAYa/lab-01/lab-01-parser/sources/JsonExeption.h
+

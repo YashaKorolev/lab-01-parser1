@@ -1,0 +1,10 @@
+/home/yasha/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/yasha/YashaKorolev/LabsAYa/lab-01/lab-01-parser
+-- [hunter] Calculating Toolchain-SHA1
+-- [hunter] Calculating Config-SHA1
+-- [hunter] HUNTER_ROOT: /home/yasha/.hunter
+-- [hunter] [ Hunter-ID: e14bc15 | Toolchain-ID: 70e2fd0 | Config-ID: 2cb8efb ]
+-- [hunter] GTEST_ROOT: /home/yasha/.hunter/_Base/e14bc15/70e2fd0/2cb8efb/Install (ver.: 1.8.0-hunter-p11)
+-- [hunter] NLOHMANN_JSON_ROOT: /home/yasha/.hunter/_Base/e14bc15/70e2fd0/2cb8efb/Install (ver.: 3.6.1)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/yasha/YashaKorolev/LabsAYa/lab-01/lab-01-parser/cmake-build-debug
