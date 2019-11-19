@@ -198,14 +198,6 @@ EXPECT_EQ(json[0].has_value(), true);
 
 
 
-TEST(Json, ParseFileException)
-{
-EXPECT_THROW(
-        Json::parseFile("file_not_existing"),
-        //Except
-        JsonException
-);
-}
 
 
 TEST(Json, Parse)
