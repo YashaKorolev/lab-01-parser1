@@ -335,7 +335,13 @@ Json Json:: parseFile(const std::string& path_to_file) {
             }
             myfile.close();
         }
+        else {
+            throw JsonException();
+        }
+        if (result.find('"') == std::string::npos) {
+            throw JsonException();
 
+        }
     //}
     //catch (JsonException e) {
      //   std::cout << e.what();

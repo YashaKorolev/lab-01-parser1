@@ -198,11 +198,19 @@ EXPECT_EQ(json[0].has_value(), true);
 
 
 
+TEST(Json, ParseFileException)
+{
+EXPECT_THROW(
+        Json::parseFile("file_not_existing"),
+        //Except
+        JsonException
+);
+}
 
 
 TEST(Json, Parse)
 {
-////auto json = Json::parseFile("/home/absinthetoxin/CrazyOverdose/lab01/lab-01-parser/tests/testparsefile1.json");
+//auto json = Json::parseFile("/home/absinthetoxin/CrazyOverdose/lab01/lab-01-parser/tests/testparsefile1.json");
 auto json = Json::parse("{\"key\" : \"value\"}");
 
 EXPECT_EQ(json.is_object(), true);
