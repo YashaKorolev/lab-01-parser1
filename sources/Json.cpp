@@ -217,10 +217,7 @@ std::vector<std::string> Json:: splitarray() {
         }
     }
 
-    if (!bracket.empty()) {
-        throw JsonException();
 
-    }
 
 
     for (int i = 0; i <(int) json_d.size(); i++)
@@ -273,7 +270,7 @@ std::any Json:: checkstr(const std::string& str) {
             result = st;
             return result;
         }
-        throw  JsonException();
+
     }
 
 
@@ -304,9 +301,7 @@ std::any Json:: operator[](const std::string& key) {
 
 
 std::any Json:: operator[](int index) {
-    if (is_object()) {
-        throw JsonException();
-    }
+
 
     auto json_array = splitarray(); //
 
@@ -340,13 +335,7 @@ Json Json:: parseFile(const std::string& path_to_file) {
             }
             myfile.close();
         }
-        else {
-            throw JsonException();
-        }
-        if (result.find('"') == std::string::npos) {
-            throw JsonException();
 
-        }
     //}
     //catch (JsonException e) {
      //   std::cout << e.what();
