@@ -10,9 +10,11 @@
 
 class JsonException : public std::exception
 {
-    virtual const char* what() const throw()
+public:
+
+    const char*what() const noexcept
     {
-        return "Exception Json";
+        return "Error: Wrong input\n";
     }
-}json_exeption;
+};
 #endif //LAB_01_PARSER_JSONEXEPTION_H

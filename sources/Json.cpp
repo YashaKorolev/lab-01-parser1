@@ -9,11 +9,9 @@
 
 
 
-
-
-
 Json::Json(const std::string& s) {
-    json_s = s;
+    json_s = clearspaces(s);
+
 }
 
 // Ìåòîä âîçâðàùàåò true, åñëè äàííûé ýêçåìïëÿð ñîäåðæèò â ñåáå JSON-ìàññèâ. Èíà÷å false.
@@ -49,7 +47,7 @@ std::string Json:: clearspaces(std::string sourse) {
     std::string result;
 
     int i;
-    for (i = 0; i < sourse.size(); i++)
+    for (i = 0; i < (int)sourse.size(); i++)
     {
         if (sourse[i] == ' ' || sourse[i] == '\t') {
             continue;
@@ -91,14 +89,14 @@ std::string Json:: clearquots(std::string sourse) {
 
     int l = t.size();
     if (l == 0) {
-        throw json_exeption;
+        throw  JsonException();
     }
 
     if (t[0] == '"' && t[l-1] != '"') {
-        throw json_exeption;
+        throw  JsonException();
     }
     if (t[0] != '"' && t[l-1] == '"') {
-        throw json_exeption;
+        throw  JsonException();
     }
     int i = 0, j = l - 1;
     if (t[0] == '"' && t[l-1] == '"') {
@@ -178,7 +176,7 @@ std::vector<std::string> Json:: splitarray() {
                 new_value += *it;
                 if (*it == ']' || *it == '}') {
                     if (bracket.empty()) {
-                        throw json_exeption;
+                        throw  JsonException();
                     }
                     bracket.pop();
 
@@ -211,7 +209,7 @@ std::vector<std::string> Json:: splitarray() {
             }
             if (*it == ']' || *it == '}') {
                 if (bracket.empty()) {
-                    throw json_exeption;
+                    throw  JsonException();
                 }
                 bracket.pop();
             }
@@ -220,12 +218,12 @@ std::vector<std::string> Json:: splitarray() {
     }
 
     if (!bracket.empty()) {
-        throw json_exeption;
+        throw JsonException();
 
     }
 
 
-    for (int i = 0; i < json_d.size(); i++)
+    for (int i = 0; i <(int) json_d.size(); i++)
     {
         std::pair<std::string, std::string> t = json_d[i];
         t.first = clearquots(t.first);
@@ -275,7 +273,7 @@ std::any Json:: checkstr(const std::string& str) {
             result = st;
             return result;
         }
-        throw json_exeption;
+        throw  JsonException();
     }
 
 
@@ -287,7 +285,7 @@ std::any Json:: checkstr(const std::string& str) {
 
 std::any Json:: operator[](const std::string& key) {
     if (is_array()) {
-        throw json_exeption;
+        throw  JsonException();
     }
 
 
@@ -307,14 +305,14 @@ std::any Json:: operator[](const std::string& key) {
 
 std::any Json:: operator[](int index) {
     if (is_object()) {
-        throw json_exeption;
+        throw JsonException();
     }
 
     auto json_array = splitarray(); //
 
     std::any res;
 
-    for (int i = 0; i < json_array.size(); i++) {
+    for (int i = 0; i <(int) json_array.size(); i++) {
         if (i == index) {
             res = checkstr(json_array[i]);
         }
@@ -333,16 +331,26 @@ Json Json:: parseFile(const std::string& path_to_file) {
     std::string line;
     std::string result;
     std::ifstream myfile(path_to_file);
-    if (myfile.is_open())
-    {
-        while (getline(myfile, line))
+    //try {
+        if (myfile.is_open())
         {
-            result += line;
+            while (getline(myfile, line))
+            {
+                result += line;
+            }
+            myfile.close();
         }
-        myfile.close();
-    }
-    if (result.find('"') == -1) {
-        throw json_exeption;
-    }
+        else {
+            throw JsonException();
+        }
+        if (result.find('"') == std::string::npos) {
+            throw JsonException();
+
+        }
+    //}
+    //catch (JsonException e) {
+     //   std::cout << e.what();
+    //}
+
     return Json(result);
 }
