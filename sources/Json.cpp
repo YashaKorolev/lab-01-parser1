@@ -24,6 +24,7 @@ bool Json:: is_array() const {
         return true;
     }
     else {
+
         return false;
     }
 }
@@ -88,7 +89,16 @@ std::string Json:: clearquots(std::string sourse) {
     std::string t = clearspaces(sourse);
 
     int l = t.size();
+    if (l == 0) {
+        throw  JsonException();
+    }
 
+    if (t[0] == '"' && t[l-1] != '"') {
+        throw  JsonException();
+    }
+    if (t[0] != '"' && t[l-1] == '"') {
+        throw  JsonException();
+    }
     int i = 0, j = l - 1;
     if (t[0] == '"' && t[l-1] == '"') {
         i++; j--;
@@ -199,14 +209,19 @@ std::vector<std::string> Json:: splitarray() {
                 bracket.push(*it);
             }
             if (*it == ']' || *it == '}') {
-
+                if (bracket.empty()) {
+                    throw  JsonException();
+                }
                 bracket.pop();
             }
             new_value += *it;
         }
     }
 
+    if (!bracket.empty()) {
+        throw JsonException();
 
+    }
 
 
     for (int i = 0; i <(int) json_d.size(); i++)
@@ -259,7 +274,7 @@ std::any Json:: checkstr(const std::string& str) {
             result = st;
             return result;
         }
-
+        throw  JsonException();
     }
 
 
@@ -290,7 +305,9 @@ std::any Json:: operator[](const std::string& key) {
 
 
 std::any Json:: operator[](int index) {
-
+    if (is_object()) {
+        throw JsonException();
+    }
 
     auto json_array = splitarray(); //
 
