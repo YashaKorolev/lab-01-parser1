@@ -196,38 +196,6 @@ EXPECT_EQ(json[0].has_value(), true);
 }
 
 
-//TEST(JsonObject, exc1) {
-//EXPECT_THROW(
-//        Json{"{"},
-//        //Except
-//        JsonException
-//);
-//}
-
-//TEST(JsonObject, exc2) {
-//EXPECT_THROW(
-//        Json{""},
-//        //Except
-//        JsonException
-//);//{"key" 23
-//}
-//
-//TEST(JsonObject, exs3) {
-//EXPECT_THROW(
-//        Json{"{\"key\" : false \"key2\""},
-//        //Except
-//        JsonException
-//);
-//}
-//
-//TEST(JsonObject, exc4) {
-//EXPECT_THROW(
-//        Json{"[\"key\" : 23"},
-//        //Except
-//        JsonException
-//);
-//}
-
 TEST(Json, ParseFile)
 {
 auto json = Json::parseFile("../tests/testparsefile1.json");
@@ -244,7 +212,7 @@ TEST(Json, except_left_quote)
     auto json  = Json::parse("{\"key : \"value\"}");
     EXPECT_THROW(
             json["key"],
-    //Except
+
             JsonException
     );
 }
@@ -255,7 +223,7 @@ TEST(Json, except_right_quote)
     auto json  = Json::parse("{key\": \"value\"}");
     EXPECT_THROW(
             json["key"],
-    //Except
+
             JsonException
     );
 }
@@ -266,7 +234,7 @@ TEST(Json, except_index_in_object)
     auto json  = Json::parse(" {\"key\": true}" );
     EXPECT_THROW(
             json[0],
-    //Except
+
             JsonException
     );
 }
@@ -277,7 +245,7 @@ TEST(Json, except_key_in_array)
     auto json  = Json::parse(" [\"key\", true]" );
     EXPECT_THROW(
             json["key"],
-    //Except
+
             JsonException
     );
 }
@@ -286,7 +254,7 @@ TEST(Json, ParseFileException)
 {
 EXPECT_THROW(
         Json::parseFile("file_not_existing"),
-        //Except
+
         JsonException
 );
 }
@@ -308,10 +276,6 @@ Json json{ "[ false, [[false], 1, 3], true]" };
 EXPECT_EQ(json.is_object(), false);
 EXPECT_EQ(json.is_array(), true);
 }
-
-
-
-
 
 
 TEST(JsonArray,  obj_in_obj)

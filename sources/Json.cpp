@@ -14,23 +14,22 @@ Json::Json(const std::string& s) {
 
 }
 
-// Ìåòîä âîçâðàùàåò true, åñëè äàííûé ýêçåìïëÿð ñîäåðæèò â ñåáå JSON-ìàññèâ. Èíà÷å false.
+
 bool Json:: is_array() const {
     if (json_s.size() == 0) {
         return false;
     }
-    //[1,2,3,4]
+
     if (json_s[0] == '[' && json_s[json_s.size() - 1] == ']') {
         return true;
     }
     else {
-
         return false;
     }
 }
 
 
-// Ìåòîä âîçâðàùàåò true, åñëè äàííûé ýêçåìïëÿð ñîäåðæèò â ñåáå JSON-îáúåêò. Èíà÷å false.
+
 bool Json:: is_object() const {
     if (json_s.size() == 0) {
         return false;
@@ -43,7 +42,6 @@ bool Json:: is_object() const {
     }
 }
 
-// "sd f \tsdf"
 std::string Json:: clearspaces(std::string sourse) {
     std::string result;
 
@@ -72,16 +70,13 @@ std::string Json:: clearspaces(std::string sourse) {
 
     for (; i <= j; i++)
     {
-
         result += sourse[i];
-
     }
 
     return result;
 }
 
 
-//Î÷èñòêà îò âåäóùèõ è â êîíöå ïðîáåëîâ, òàáóëÿöèé, åñëè åñòü. È êàâû÷åê
 std::string Json:: clearquots(std::string sourse) {
 
     std::string result;
@@ -89,9 +84,7 @@ std::string Json:: clearquots(std::string sourse) {
     std::string t = clearspaces(sourse);
 
     int l = t.size();
-//    if (l == 0) {
-//        throw  JsonException();
-//    }
+
 
     if (t[0] == '"' && t[l-1] != '"') {
         throw  JsonException();
@@ -113,8 +106,6 @@ std::string Json:: clearquots(std::string sourse) {
 
     return result;
 }
-
-
 
 std::vector<std::string> Json:: splitarray() {
     std::vector<std::string> json_array;
@@ -176,9 +167,7 @@ std::vector<std::string> Json:: splitarray() {
             if ((it + 1) == str3.end() && *it != ',') {
                 new_value += *it;
                 if (*it == ']' || *it == '}') {
-//                    if (bracket.empty()) {
-//                        throw  JsonException();
-//                    }
+
                     bracket.pop();
 
                 }
@@ -204,24 +193,17 @@ std::vector<std::string> Json:: splitarray() {
             new_key += *it;
         }
         else {
-            //
+
             if (*it == '[' || *it == '{') {
                 bracket.push(*it);
             }
             if (*it == ']' || *it == '}') {
-//                if (bracket.empty()) {
-//                    throw  JsonException();
-//                }
+
                 bracket.pop();
             }
             new_value += *it;
         }
     }
-
-//    if (!bracket.empty()) {
-//        throw JsonException();
-//
-//    }
 
 
     for (int i = 0; i <(int) json_d.size(); i++)
@@ -259,8 +241,6 @@ std::any Json:: checkstr(const std::string& str) {
         return result;
     }
 
-
-
     // double
     try {
         double d = std::stod(clearspc);
@@ -277,10 +257,7 @@ std::any Json:: checkstr(const std::string& str) {
         throw  JsonException();
     }
 
-
-
-
-    return result;
+    //return result;
 }
 
 
@@ -309,7 +286,7 @@ std::any Json:: operator[](int index) {
         throw JsonException();
     }
 
-    auto json_array = splitarray(); //
+    auto json_array = splitarray();
 
     std::any res;
 
@@ -322,7 +299,7 @@ std::any Json:: operator[](int index) {
     return res;
 }
 
-//////////////////////////////////////
+
 Json Json:: parse(const std::string& s) {
     return Json(s);
 }
@@ -332,7 +309,7 @@ Json Json:: parseFile(const std::string& path_to_file) {
     std::string line;
     std::string result;
     std::ifstream myfile(path_to_file);
-    //try {
+
         if (myfile.is_open())
         {
             while (getline(myfile, line))
@@ -344,14 +321,7 @@ Json Json:: parseFile(const std::string& path_to_file) {
         else {
             throw JsonException();
         }
-//        if (result.find('"') == std::string::npos) {
-//            throw JsonException();
-//
-//        }
-    //}
-    //catch (JsonException e) {
-     //   std::cout << e.what();
-    //}
+
 
     return Json(result);
 }
