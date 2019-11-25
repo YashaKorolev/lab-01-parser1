@@ -23,10 +23,10 @@ bool Json:: is_array() const {
     if (json_s[0] == '[' && json_s[json_s.size() - 1] == ']') {
         return true;
     }
-    else {
-
-        return false;
-    }
+   // else {
+   //
+   //     return false;
+   // }
 }
 
 
@@ -38,9 +38,9 @@ bool Json:: is_object() const {
     if (json_s[0] == '{' && json_s[json_s.size() - 1] == '}') {
         return true;
     }
-    else {
-        return false;
-    }
+    //else {
+    //    return false;
+    //}
 }
 
 // "sd f \tsdf"
@@ -53,9 +53,9 @@ std::string Json:: clearspaces(std::string sourse) {
         if (sourse[i] == ' ' || sourse[i] == '\t') {
             continue;
         }
-        else {
-            break;
-        }
+        //else {
+        //   break;
+        //}
     }
 
     int j;
@@ -64,9 +64,9 @@ std::string Json:: clearspaces(std::string sourse) {
         if (sourse[j] == ' ' || sourse[j] == '\t') {
             continue;
         }
-        else {
-            break;
-        }
+        //else {
+        //    break;
+        //}
     }
 
 
