@@ -236,6 +236,52 @@ EXPECT_EQ(json.is_object(), false);
 EXPECT_EQ(json.is_array(), true);
 }
 
+
+
+TEST(Json, except_left_quote)
+{
+
+    auto json  = Json::parse("{\"key : \"value\"}");
+    EXPECT_THROW(
+            json["key"],
+    //Except
+            JsonException
+    );
+}
+
+TEST(Json, except_right_quote)
+{
+
+    auto json  = Json::parse("{key\": \"value\"}");
+    EXPECT_THROW(
+            json["key"],
+    //Except
+            JsonException
+    );
+}
+
+TEST(Json, except_index_in_object)
+{
+
+    auto json  = Json::parse(" {\"key\": true}" );
+    EXPECT_THROW(
+            json[0],
+    //Except
+            JsonException
+    );
+}
+
+TEST(Json, except_key_in_array)
+{
+
+    auto json  = Json::parse(" [\"key\", true]" );
+    EXPECT_THROW(
+            json["key"],
+    //Except
+            JsonException
+    );
+}
+
 TEST(Json, ParseFileException)
 {
 EXPECT_THROW(
@@ -262,6 +308,11 @@ Json json{ "[ false, [[false], 1, 3], true]" };
 EXPECT_EQ(json.is_object(), false);
 EXPECT_EQ(json.is_array(), true);
 }
+
+
+
+
+
 
 TEST(JsonArray,  obj_in_obj)
 {

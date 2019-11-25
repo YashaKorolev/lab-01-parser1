@@ -89,9 +89,9 @@ std::string Json:: clearquots(std::string sourse) {
     std::string t = clearspaces(sourse);
 
     int l = t.size();
-    if (l == 0) {
-        throw  JsonException();
-    }
+//    if (l == 0) {
+//        throw  JsonException();
+//    }
 
     if (t[0] == '"' && t[l-1] != '"') {
         throw  JsonException();
@@ -176,9 +176,9 @@ std::vector<std::string> Json:: splitarray() {
             if ((it + 1) == str3.end() && *it != ',') {
                 new_value += *it;
                 if (*it == ']' || *it == '}') {
-                    if (bracket.empty()) {
-                        throw  JsonException();
-                    }
+//                    if (bracket.empty()) {
+//                        throw  JsonException();
+//                    }
                     bracket.pop();
 
                 }
@@ -209,19 +209,19 @@ std::vector<std::string> Json:: splitarray() {
                 bracket.push(*it);
             }
             if (*it == ']' || *it == '}') {
-                if (bracket.empty()) {
-                    throw  JsonException();
-                }
+//                if (bracket.empty()) {
+//                    throw  JsonException();
+//                }
                 bracket.pop();
             }
             new_value += *it;
         }
     }
 
-    if (!bracket.empty()) {
-        throw JsonException();
-
-    }
+//    if (!bracket.empty()) {
+//        throw JsonException();
+//
+//    }
 
 
     for (int i = 0; i <(int) json_d.size(); i++)
